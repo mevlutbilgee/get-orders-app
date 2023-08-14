@@ -1,6 +1,4 @@
-const axios = require("axios");
 const moment = require("moment");
-
 const store_url = "https://dopigo-development-store.myshopify.com/";
 const api_key = "9663849bb738899a6d8147875ce99a4f";
 const api_password = "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";
@@ -17,7 +15,7 @@ console.log(today_str);
 console.log(created_at_min);
 async function getOrders() {
   const endpoint = `${store_url}/admin/api/2023-04/orders.json?status=any`;
-  const response = await axios.get(endpoint, {
+  const response = await axios(endpoint, {
     auth: {
       username: api_key,
       password: api_password,
