@@ -1,18 +1,27 @@
-const moment = require("moment");
 const store_url = "https://dopigo-development-store.myshopify.com/";
 const api_key = "9663849bb738899a6d8147875ce99a4f";
 const api_password = "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";
 const api_url = "https://panel.dopigo.com/api/v1/orders/";
 const api_token = "6a8e9a1493ec7c54c93fd0729c2c04edb78941b8";
 
-const today = moment();
-const two_week_ago = moment().subtract(10, "days");
-const today_str = today.format("YYYY-MM-DD");
-const two_week_ago_str = two_week_ago.format("YYYY-MM-DD");
-const created_at_max = today.toISOString();
-const created_at_min = two_week_ago.toISOString();
-console.log(today_str);
-console.log(created_at_min);
+const today = new Date();
+const year = today.getFullYear(); // Yıl (YYYY)
+const month = String(today.getMonth() + 1).padStart(2, "0"); // Ay (AA)
+const day = String(today.getDate()).padStart(2, "0"); // Gün (GG)
+const formattedDate = `${year}-${month}-${day}`;
+// console.log(today);
+console.log(formattedDate);
+const tenDaysAgo = new Date(today);
+tenDaysAgo.setDate(today.getDate() - 10);
+const beforeTenDaysYear = tenDaysAgo.getFullYear(); // Yıl (YYYY)
+const beforeTenDaysMonth = String(tenDaysAgo.getMonth() + 1).padStart( 2,"0"); // Ay (AA)
+const beforeTenDays = String(tenDaysAgo.getDate()).padStart(2, "0"); // Gün (GG)
+const tenDaysformattedDate = `${beforeTenDaysYear}-${beforeTenDaysMonth}-${beforeTenDays}`;
+console.log(tenDaysformattedDate);
+
+const created_at_max = formattedDate;
+const created_at_min = tenDaysformattedDate;
+// console.log(created_at_min);
 async function getOrders() {
   const endpoint = `${store_url}/admin/api/2023-04/orders.json?status=any`;
   const response = await axios(endpoint, {
@@ -453,4 +462,4 @@ async function processOrders() {
   }
 }
 
-processOrders();
+// processOrders();
